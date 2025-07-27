@@ -185,11 +185,12 @@ h3 {
     object-fit: cover;
     border: 3px solid;
     border-color: #999;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .hero-image img:hover {
     transform: scale(1.05);
+    border-color: var(--clr-primary-a0);
 }
 
 .highlight {
@@ -517,7 +518,7 @@ section.visible {
     border-radius: 16px; 
     padding: 0;
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08); 
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, border-color 0.3s ease;
     overflow: hidden;
     height: 100%;
     display: flex;
@@ -531,6 +532,7 @@ section.visible {
     transform: translateY(-8px); 
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
     z-index: 10;
+    border-color: var(--clr-primary-a0);
 }
 
 .project-image {
@@ -1222,6 +1224,14 @@ body.dark-mode .about-text p {
 body.dark-mode .project-card > div {
     background: var(--clr-surface-tonal-a0);
     border: 1px solid var(--clr-surface-a30);
+    transition: all 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .project-card:hover > div {
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+    border-color: var(--clr-primary-a0);
 }
 body.dark-mode .project-header h3,
 body.dark-mode .project-content h3 {
@@ -1268,4 +1278,15 @@ body.dark-mode .social-links a {
 body.dark-mode .social-links a:hover {
     background: var(--clr-primary-a0);
     color: var(--clr-light-a0);
+}
+
+/* Hamburger menu bars and nav text in light mode */
+body:not(.dark-mode) .menu-toggle .bar {
+    background-color: #666 !important;
+}
+body:not(.dark-mode) .nav-menu a {
+    color: #666 !important;
+}
+body:not(.dark-mode) .nav-menu a:hover {
+    color: var(--clr-primary-a0) !important;
 }
