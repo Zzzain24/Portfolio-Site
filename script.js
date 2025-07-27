@@ -286,3 +286,41 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Dark Mode Toggle
+function setDarkMode(enabled) {
+    const body = document.body;
+    const toggle = document.getElementById('darkModeToggle');
+    if (enabled) {
+        body.classList.add('dark-mode');
+        if (toggle) {
+            toggle.classList.add('active');
+            toggle.innerText = '☀️';
+            toggle.setAttribute('aria-label', 'Switch to light mode');
+        }
+    } else {
+        body.classList.remove('dark-mode');
+        if (toggle) {
+            toggle.classList.remove('active');
+            toggle.innerText = '🌙';
+            toggle.setAttribute('aria-label', 'Switch to dark mode');
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Dark mode toggle logic
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        // Check saved preference or system preference
+        const saved = localStorage.getItem('darkMode');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const darkEnabled = saved === 'true' || (saved === null && prefersDark);
+        setDarkMode(darkEnabled);
+        darkModeToggle.addEventListener('click', function() {
+            const isDark = document.body.classList.contains('dark-mode');
+            setDarkMode(!isDark);
+            localStorage.setItem('darkMode', String(!isDark));
+        });
+    }
+});
+

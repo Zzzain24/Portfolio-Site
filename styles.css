@@ -93,6 +93,7 @@ h3 {
     display: flex;
     list-style: none;
     gap: 2rem;
+    align-items: center;
 }
 
 .nav-menu a {
@@ -824,15 +825,38 @@ section {
     font-size: 1.5rem;
     color: #666;
     z-index: 1001;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    outline: none;
+    transition: background 0.2s;
+    border-radius: 50%;
 }
-
+.menu-toggle:hover, .menu-toggle.active {
+    background: rgba(0,0,0,0.05);
+}
 .menu-toggle .bar {
     display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    background-color: #666;
-    transition: all 0.3s ease-in-out;
+    width: 28px;
+    height: 4px;
+    margin: 6px auto;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    transition: all 0.3s cubic-bezier(.4,2,.6,1), background 0.2s;
+}
+.menu-toggle.active .bar {
+    background-color: #00a2ff;
+}
+
+body.dark-mode .menu-toggle .bar {
+    background-color: #b2d5ff;
+}
+body.dark-mode .menu-toggle.active .bar {
+    background-color: #00a2ff;
 }
 
 body.no-scroll {
@@ -855,8 +879,8 @@ body.no-scroll {
         right: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(255, 255, 255, 0.97);
-        backdrop-filter: blur(10px);
+        background: rgba(40, 40, 40, 0.97);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
         padding-top: 70px;
         transition: all 0.4s ease;
         z-index: 1000;
@@ -908,7 +932,18 @@ body.no-scroll {
     }
     
     .nav-overlay {
-        display: none;
+        display: block;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.12);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
+    .nav-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
     }
     
     .hero h1 {
@@ -1054,4 +1089,183 @@ body.no-scroll {
     h2 {
         font-size: 2rem;
     }
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+    background: transparent;
+    border: 1px solid #ddd;
+    color: #666;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border 0.3s;
+    padding: 0;
+    border-radius: 8px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+}
+#darkModeToggle.active, #darkModeToggle:focus {
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+:root {
+    /* Base colors */
+    --clr-dark-a0: #000000;
+    --clr-light-a0: #ffffff;
+    /* Theme primary colors */
+    --clr-primary-a0: #00a2ff;
+    --clr-primary-a10: #4bacff;
+    --clr-primary-a20: #6cb6ff;
+    --clr-primary-a30: #86c0ff;
+    --clr-primary-a40: #9dcaff;
+    --clr-primary-a50: #b2d5ff;
+    /* Theme surface colors */
+    --clr-surface-a0: #121212;
+    --clr-surface-a10: #282828;
+    --clr-surface-a20: #3f3f3f54;
+    --clr-surface-a30: #575757;
+    --clr-surface-a40: #717171;
+    --clr-surface-a50: #8b8b8b;
+    /* Theme tonal surface colors */
+    --clr-surface-tonal-a0: #191f26;
+    --clr-surface-tonal-a10: #2e343a;
+    --clr-surface-tonal-a20: #454a50;
+    --clr-surface-tonal-a30: #5d6167;
+    --clr-surface-tonal-a40: #76797e;
+    --clr-surface-tonal-a50: #909397;
+}
+
+body.dark-mode {
+    background-color: var(--clr-surface-a0);
+    color: var(--clr-primary-a50);
+}
+body.dark-mode .navbar {
+    background: var(--clr-surface-a0);
+    border-bottom: 1px solid var(--clr-surface-a20);
+}
+body.dark-mode .nav-menu a,
+body.dark-mode .nav-home a {
+    color: var(--clr-primary-a50);
+}
+body.dark-mode .nav-menu a:hover,
+body.dark-mode .nav-home a:hover {
+    color: var(--clr-primary-a0);
+}
+body.dark-mode .btn.primary {
+    background: var(--clr-primary-a0);
+    color: var(--clr-light-a0);
+    border: 1px solid var(--clr-primary-a0);
+}
+body.dark-mode .btn.primary:hover {
+    background: var(--clr-primary-a10);
+    color: var(--clr-light-a0);
+}
+body.dark-mode .btn.secondary {
+    background: transparent;
+    color: var(--clr-primary-a50);
+    border: 1px solid var(--clr-surface-a40);
+}
+body.dark-mode .btn.secondary:hover {
+    background: var(--clr-surface-a20);
+    color: var(--clr-primary-a0);
+    border-color: var(--clr-primary-a0);
+}
+body.dark-mode .hero,
+body.dark-mode .experience {
+    background: var(--clr-surface-a20) !important;
+}
+body.dark-mode .about,
+body.dark-mode .projects {
+    background: var(--clr-surface-a10) !important;
+}
+body.dark-mode .hero h1,
+body.dark-mode .hero h2,
+body.dark-mode .hero p,
+body.dark-mode .highlight {
+    color: var(--clr-primary-a50);
+}
+body.dark-mode .about > .container > h2,
+body.dark-mode .experience h2,
+body.dark-mode .projects h2,
+body.dark-mode .contact h2,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+    color: var(--clr-primary-a50) !important;
+}
+body.dark-mode .about-text h2,
+body.dark-mode .about-skills h2 {
+    color: var(--clr-primary-a50);
+}
+body.dark-mode .timeline-left h4,
+body.dark-mode .timeline-right h3 {
+    color: var(--clr-primary-a50);
+}
+body.dark-mode .timeline-left .date {
+    color: var(--clr-surface-a50);
+}
+body.dark-mode .timeline-right p,
+body.dark-mode .about-text p {
+    color: var(--clr-surface-a50);
+}
+body.dark-mode .project-card > div {
+    background: var(--clr-surface-tonal-a0);
+    border: 1px solid var(--clr-surface-a30);
+}
+body.dark-mode .project-header h3,
+body.dark-mode .project-content h3 {
+    color: var(--clr-primary-a50);
+}
+body.dark-mode .project-content p {
+    color: var(--clr-surface-a50);
+}
+body.dark-mode .tech-tag {
+    background: var(--clr-surface-tonal-a10);
+    color: var(--clr-primary-a50);
+    border: 1px solid var(--clr-surface-a40);
+}
+body.dark-mode .project-link {
+    color: var(--clr-primary-a20);
+}
+body.dark-mode .project-link:hover {
+    color: var(--clr-primary-a0);
+    background: var(--clr-surface-tonal-a20);
+}
+body.dark-mode .carousel-btn {
+    background: var(--clr-surface-a20);
+    color: var(--clr-primary-a50);
+    border: 1px solid var(--clr-surface-a40);
+}
+body.dark-mode .carousel-btn:hover {
+    background: var(--clr-surface-a30);
+    color: var(--clr-primary-a0);
+}
+body.dark-mode .indicator {
+    background: var(--clr-surface-a40);
+}
+body.dark-mode .indicator.active {
+    background: var(--clr-primary-a0);
+}
+body.dark-mode .contact {
+    background: var(--clr-surface-a0);
+    color: var(--clr-primary-a50);
+}
+body.dark-mode .social-links a {
+    background: var(--clr-surface-tonal-a10);
+    color: var(--clr-primary-a50);
+}
+body.dark-mode .social-links a:hover {
+    background: var(--clr-primary-a0);
+    color: var(--clr-light-a0);
 }
