@@ -791,6 +791,7 @@ section.visible {
     border-radius: 8px;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.05);
+    position: relative;
 }
 
 .social-links a:hover {
@@ -802,6 +803,40 @@ section.visible {
 .social-links svg {
     width: 24px;
     height: 24px;
+}
+
+.social-links .icon-tooltip {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 6px);
+    transform: translateX(-50%) translateY(-2px);
+    background: var(--clr-surface-tonal-a10);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 1000;
+}
+
+.social-links .icon-tooltip::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid var(--clr-surface-tonal-a10);
+}
+
+.social-links a:hover .icon-tooltip,
+.social-links a:focus .icon-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* Scroll Animations */
